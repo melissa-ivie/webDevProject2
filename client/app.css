@@ -1,0 +1,138 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.head1{
+    display: inline-block;
+    width: 100%;
+    align-content: center;
+    color: white; 
+    background-color: rgb(14, 77, 77); 
+    position: fixed;
+    padding: 3px;
+    padding-top: 20px;
+}
+
+h1 { 
+    display: inline;
+    font-size: 40px;
+    font-weight: 300;
+    font-family: Verdana;
+    vertical-align: middle;
+    margin-left: 36%;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logoutButton{
+    margin-left:80%;
+    vertical-align: middle;
+}
+
+.pageBody{
+    padding-top: 200px;
+    padding-left: 15%;
+}
+
+h4{
+    padding-top: 5px; 
+}
+
+.projectList{
+    display: inline-block;
+    padding-bottom: 40px;
+    max-width: 70%;
+}
+
+.taskList{
+    padding-bottom: 40px;
+}
+
+.task { 
+    border: 1px solid black; 
+    margin-bottom: 20px;
+    background-color: #4bc9c9;
+    width: 30%; 
+    padding: 20px; 
+    overflow-wrap: break-word;
+}
+
+.completeTask {
+    padding: 10px; 
+    background-color: lightgray;
+    max-width: 70%;
+}
+
+.h5 {
+    font-size: 20px;
+}
+
+.taskTitle{
+    font-size: large;
+    font-weight: bolder;
+}
+
+.taskCategory{
+    font-size: x-large;
+    font-weight: bolder;
+    color:rgb(14, 77, 77);
+    padding-bottom: 30px;
+}
+
+
+.projectTitle{
+    font-size: xx-large;
+}
+
+.add{
+    margin-top: 20px;
+    margin-right: 30%;
+    background-color:lightblue ;
+    padding: 20px;
+    color: black;
+    float: right;
+}
+
+.return{
+    background-color: aquamarine;
+    padding: 10px
+}
+
+.project{
+    background-color: #4c5464;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: large;
+    padding: 50px;
+    color: white;
+    box-shadow: 6px 6px lightblue;
+    margin: 17px;
+}
+
+.project:hover{
+    background-color: #6a768d
+}
+
+footer {
+    text-align: center;
+    background-color: rgb(14, 77, 77);
+    color:white;
+    position:fixed;
+    font-size: xx-small;
+    bottom: 0;
+    width: 100%;
+    height: 2rem; 
+}
+
+.page{
+    overflow: scroll;
+}
+
+.page:after{
+    display:block;
+}

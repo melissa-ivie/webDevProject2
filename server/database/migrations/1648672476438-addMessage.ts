@@ -14,17 +14,17 @@ export class addMessage1648672476438 implements MigrationInterface {
               },
               {
                 name: 'chatroom',
-                type: 'int',
+                type: 'text',
                 isNullable: false,
               },
               {
                 name: 'time',
-                type: 'int',
+                type: 'Date',
                 isNullable: true,
               },
               {
-                name: 'userID',
-                type: 'int',
+                name: 'userName',
+                type: 'text',
                 isNullable: true,
               },
               {

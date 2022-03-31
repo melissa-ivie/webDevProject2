@@ -1,7 +1,6 @@
 export class CreateMessagesDto {
-    chatroom: number;
-    time: number;
-    userID: number;
+    chatroom: string;
+    userName: string;
     content: string; 
   }
   

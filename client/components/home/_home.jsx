@@ -10,17 +10,23 @@ export const Home = () => {
   var localChats = [];
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [chatrooms, setChatrooms] = useState(true);
   var options = {
     enableHighAccuracy: false,
-    timeout: 5000,
+    timeout: 10000,
     maximumAge: 0
   };
 
   useEffect(async () => {
     const res = await api.get('/chatrooms');
     setChatrooms(res.chatrooms);
+  }, []);
+
+  useEffect(async () => {ß
+    const res = await api.get('/users/me');
+    setUser(res.user);
   }, []);
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -31,6 +37,7 @@ export const Home = () => {
       setLoading(false);
     }, console.log, options);
   
+
   const goToNewChatPage = () => {
     navigate('/newChatPage');
   };

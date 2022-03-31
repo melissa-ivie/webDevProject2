@@ -25,8 +25,7 @@ export class MessagesController {
   async create(@Body() body: CreateMessagesDto, @Res({ passthrough: true }) res: Response) {
     const newMessage = new Message();
     newMessage.chatroom = body.chatroom;
-    newMessage.time = body.time;
-    newMessage.userID = body.userID;
+    newMessage.userName = body.userName;
     newMessage.content = body.content;
 
     try {

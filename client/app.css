@@ -53,9 +53,9 @@ h4{
     padding-bottom: 40px;
 }
 
-.task { 
-    border: 1px solid black; 
-    margin-bottom: 20px;
+.messagebox{ 
+    border-radius: 25px;
+    margin-bottom: 10px;
     background-color: #4bc9c9;
     width: 30%; 
     padding: 20px; 

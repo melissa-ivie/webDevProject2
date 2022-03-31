@@ -30,8 +30,8 @@ export const NewChatroom = () => {
         return;
         }
 
-        const lat = sessionStorage.getItem("lat");
-        const long = sessionStorage.getItem("long");
+        const lat = parseFloat(sessionStorage.getItem("lat"));
+        const long = parseFloat(sessionStorage.getItem("long"));
         
         fetch('/chatroom', {
             method: 'POST',
@@ -45,11 +45,11 @@ export const NewChatroom = () => {
                 title,
             })
         })
-        navigate('/chatpage');
+        navigate('/dash');
     };
 
     const cancelAdd = async () => {
-      navigate('/');
+      navigate('/dash');
     };
 
   return (

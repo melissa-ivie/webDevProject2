@@ -1,14 +1,16 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany, ManyToMany, Column } from 'typeorm';
 import { User } from './user.entity';
-import { Task } from './task.entity';
 
 @Entity()
-export class Project {
+export class Chatroom {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  projectLeaderID: number;
+  lat: number;
+
+  @Column()
+  long: number;
 
   @Column()
   title: string;
@@ -18,7 +20,4 @@ export class Project {
 
   @ManyToMany(() => User, (user) => user.email)
   users: User[];
-
-  @OneToMany(() => Task, (task) => task.id)
-  tasks: Task[];
 }

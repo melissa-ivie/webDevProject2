@@ -3,9 +3,8 @@ import { ApiContext } from '../../utils/api_context';
 import { Header } from '../common/header';
 import { Button } from '../common/button';
 import { useNavigate } from 'react-router';
-import { Task } from '../common/task';
 
-export const ProjectPage = () => {
+export const ChatPage = () => {
   const api = useContext(ApiContext);
   var incompleteProjectTasks = [];
   var completeProjectTasks = [];
@@ -36,12 +35,6 @@ export const ProjectPage = () => {
     sessionStorage.setItem("selectedProject", "None");
     navigate('/');
   };
-
-//navigate to new task
-  const goToNewTaskPage = () =>{
-    navigate('/newTask')
-  }
-
 
   //Creates list of all tasks for the project
   const getTasks = () => {

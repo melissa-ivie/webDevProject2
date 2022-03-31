@@ -9,19 +9,19 @@ import { RolesGuard } from './providers/guards/roles.guard';
 import { JwtService } from './providers/services/jwt.service';
 import { RolesService } from './providers/services/roles.service';
 import { UsersService } from './providers/services/users.service';
-import { ProjectsService } from './providers/services/projects.service';
+import { ChatroomsService } from './providers/services/chatrooms.service';
 import { GuardUtil } from './providers/util/guard.util';
-import { TasksService } from './providers/services/tasks.service';
+import { MessagesService } from './providers/services/messages.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(config), UsersModule],
   controllers: [AppController],
   providers: [
-    ProjectsService,
+    ChatroomsService,
     UsersService,
     RolesService,
     JwtService,
-    TasksService,
+    MessagesService,
     GuardUtil,
     { provide: APP_GUARD, useClass: AuthGuard }, // auth guard should come before roles guard
     { provide: APP_GUARD, useClass: RolesGuard }, // otherwise users won't be authenticated before roles check

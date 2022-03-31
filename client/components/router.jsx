@@ -5,9 +5,8 @@ import { AuthContext } from '../utils/auth_context';
 import { SignIn } from './sign_in/_sign_in';
 import { SignUp } from './sign_up/_sign_up';
 import { Admin } from './admin/_admin';
-import { ProjectPage } from './home/_project_page';
-import { NewProject } from './home/_new_project';
-import { NewTask } from './home/_new_task';
+import { ChatPage } from './home/_chat_page';
+import { NewChatroom } from './home/_new_chatroom';
 export const Router = () => {
   const [authToken] = useContext(AuthContext);
 
@@ -20,9 +19,8 @@ export const Router = () => {
       <Route path="admin" element={<Admin />} />
       <Route path="signin" element={<SignIn />} />
       <Route path="signup" element={<SignUp />} />
-      <Route path="projectPage" element={<ProjectPage />} />
-      <Route path="newProjectPage" element={<NewProject />} />
-      <Route path="newTask" element={<NewTask/>}/>
+      <Route path="projectPage" element={<ChatPage />} />
+      <Route path="newProjectPage" element={<NewChatroom />} />
     </Routes>
   );
 };

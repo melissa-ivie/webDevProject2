@@ -20,15 +20,12 @@ export const Home = () => {
   };
 
   useEffect(async () => {
-    console.log("useeffect 1");
     const res = await api.get('/chatrooms');
     setChatrooms(res.chatrooms);
   }, []);
 
   useEffect(async () => {
-    console.log("useeffect 2");
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("useeffect 2.1");
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
       setLoading(false);
@@ -37,10 +34,9 @@ export const Home = () => {
     }, console.log, options);
   }, []);
 
- 
-  console.log("render");
-
   const goToNewChatPage = () => {
+    let enterTime = new Date();
+    sessionStorage.setItem("enterTime", parseFloat(enterTime.getTime()));
     sessionStorage.setItem("lat", lat);
     sessionStorage.setItem("lon", lon);
     navigate('/newChatPage');

@@ -32,6 +32,7 @@ export const NewChatroom = () => {
 
         let lat = parseFloat(sessionStorage.getItem("lat"));
         let lon = parseFloat(sessionStorage.getItem("lon"));
+        sessionStorage.setItem("selectedChat", title);
 
         if((lat === null) || (lon === null)){
           setErrorMessage('Still fetching Location, close and try again');
@@ -50,7 +51,7 @@ export const NewChatroom = () => {
                 title,
             })
         })
-        navigate('/');
+        navigate('/chatpage');
     };
 
     const cancelAdd = async () => {

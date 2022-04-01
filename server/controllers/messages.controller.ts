@@ -32,7 +32,6 @@ export class MessagesController {
 
     try {
       const message = await this.messageService.create(newMessage);
-      console.log(message);
       return { message };
     } catch (e) {
       throw new HttpException(`Task creation failed. ${e.message}`, HttpStatus.BAD_REQUEST);

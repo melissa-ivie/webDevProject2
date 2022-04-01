@@ -38,7 +38,6 @@ export const ChatPage = () => {
 
   //Retrieve all messages for this chat
   const getMessages = () => {
-    console.log("inside get messages");
     chatMessages = [];
     let messObj = {};
     for(const message in messages){
@@ -59,7 +58,6 @@ export const ChatPage = () => {
   }
 
   if(messages!== null){
-    console.log(messages);
     getMessages();
   }
 

@@ -8,11 +8,11 @@ export const Home = () => {
   const api = useContext(ApiContext);
   const navigate = useNavigate();
   var localChats = [];
-  const [user, setUser] = useState(null);
+  var x, y; 
   const [loading, setLoading] = useState(true);
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
-  const [chatrooms, setChatrooms] = useState(true);
+  const [chatrooms, setChatrooms] = useState(null);
   var options = {
     enableHighAccuracy: true,
     timeout: 10000,
@@ -20,25 +20,25 @@ export const Home = () => {
   };
 
   useEffect(async () => {
-    setLoading(true);
-    navigator.geolocation.getCurrentPosition(function(position) {
-      let latitude = position.coords.latitude;
-      let longitude = position.coords.longitude;
-      setLat(latitude);
-      setLon(longitude);
-    }, console.log, options);
-    setLoading(false);
-  }, []);
-
-  useEffect(async () => {
+    console.log("useeffect 1");
     const res = await api.get('/chatrooms');
     setChatrooms(res.chatrooms);
   }, []);
 
   useEffect(async () => {
-    const res = await api.get('/users/me');
-    setUser(res.user);
+    console.log("useeffect 2");
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("useeffect 2.1");
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      setLoading(false);
+      setLat(latitude);
+      setLon(longitude);
+    }, console.log, options);
   }, []);
+
+ 
+  console.log("render");
 
   const goToNewChatPage = () => {
     sessionStorage.setItem("lat", lat);
@@ -68,6 +68,7 @@ export const Home = () => {
     }
     localChats = Object.assign(localChats,chatObj)
   };
+
 
   if (loading) {
     return <div>Loading...</div>;

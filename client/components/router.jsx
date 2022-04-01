@@ -16,7 +16,6 @@ export const Router = () => {
         path="/"
         element={authToken ? <Home /> : <Navigate replace to="signin" />} // no token means not logged in
       />
-      <Route path="dash" element={<Home />} />
       <Route path="admin" element={<Admin />} />
       <Route path="signin" element={<SignIn />} />
       <Route path="signup" element={<SignUp />} />

@@ -16,6 +16,7 @@ export const ChatPage = () => {
   const [newMessage, setNewMessage] = useState("");
   const [user, setUser] = useState(null);
   const chatroom = sessionStorage.getItem("selectedChat");
+  const enterTime = parseFloat(sessionStorage.getItem("enterTime"));
   var currentTime = new Date();
 
   useEffect(async () => {
@@ -32,36 +33,39 @@ export const ChatPage = () => {
 
   const goToDashboard = () => {
     sessionStorage.setItem("selectedChat", "None");
-    navigate('/dash');
+    navigate('/');
   };
 
   //Retrieve all messages for this chat
   const getMessages = () => {
+    console.log("inside get messages");
     chatMessages = [];
     let messObj = {};
     for(const message in messages){
       let currentMessage = messages[message];
       let cID = currentMessage.id;
-      console.log(currentMessage)
       let room = currentMessage.chatroom;
       if((chatroom == room)&&(currentMessage.content != null)){
-        messObj[cID] = currentMessage;
+        if(currentMessage.timeStamp >= enterTime){
+          messObj[cID] = currentMessage;
+        }
       }
     }
     chatMessages = Object.assign(chatMessages,messObj)
   };
   
-  if(user!=null){
+  if(user!== null){
     userName = user.firstName;
   }
 
-  if(messages!=null){
+  if(messages!== null){
     console.log(messages);
     getMessages();
   }
 
   const addNewMessage = async () => {
     let content = newMessage;
+    let timeStamp = parseFloat(currentTime.getTime());
     fetch('/message', {
         method: 'POST',
         headers: {
@@ -70,12 +74,13 @@ export const ChatPage = () => {
         },
         body: JSON.stringify({
             chatroom,
+            timeStamp,
             userName,
             content,
         })
     })
-    setNewMessage("");
     window.location.reload(false);
+    setNewMessage("");
 };
 
   if (loading) {

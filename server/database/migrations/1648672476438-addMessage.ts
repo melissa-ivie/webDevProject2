@@ -18,8 +18,8 @@ export class addMessage1648672476438 implements MigrationInterface {
                 isNullable: false,
               },
               {
-                name: 'time',
-                type: 'Date',
+                name: 'timeStamp',
+                type: 'float',
                 isNullable: true,
               },
               {

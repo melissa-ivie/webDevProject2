@@ -21,18 +21,12 @@ export const Home = () => {
 
   useEffect(async () => {
     setLoading(true);
-    console.log("here");
     navigator.geolocation.getCurrentPosition(function(position) {
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
-      if(latitude)
       setLat(latitude);
       setLon(longitude);
     }, console.log, options);
-    console.log("before load");
-    console.log(loading);
-    console.log(lat)
-    console.log(lon)
     setLoading(false);
   }, []);
 
@@ -53,12 +47,13 @@ export const Home = () => {
   };
 
   const goToChatPage = (p, pro) => {
+    let enterTime = new Date();
     sessionStorage.setItem("selectedChat", pro.title);
+    sessionStorage.setItem("enterTime", parseFloat(enterTime.getTime()));
     navigate('/chatpage');
   };
 
   const getChatrooms = () => {
-    console.log(loading);
     let latitude = lat;
     let longitude = lon;
     let chatObj = {};
@@ -67,15 +62,7 @@ export const Home = () => {
       let prID = currentChat.id; 
       let chatLat = currentChat.lat;
       let chatLon = currentChat.lon;
-      console.log(currentChat);
-      console.log("passed in");
-      console.log(latitude);
-      console.log(longitude);
-      console.log(sessionStorage.getItem("lat"));
-      console.log("chat");
-      console.log(chatLat);
-      console.log(chatLon);
-      if((Math.abs(chatLat-latitude) < .001) && (Math.abs(chatLon-longitude) < .001)){
+      if((Math.abs(chatLat-latitude) < .006) && (Math.abs(chatLon-longitude) < .005)){
         chatObj[prID] = currentChat
       }
     }
@@ -83,7 +70,6 @@ export const Home = () => {
   };
 
   if (loading) {
-    console.log("inside loading loop")
     return <div>Loading...</div>;
   }else{
     return (

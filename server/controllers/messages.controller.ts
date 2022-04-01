@@ -25,11 +25,14 @@ export class MessagesController {
   async create(@Body() body: CreateMessagesDto, @Res({ passthrough: true }) res: Response) {
     const newMessage = new Message();
     newMessage.chatroom = body.chatroom;
+    newMessage.timeStamp = body.timeStamp;
     newMessage.userName = body.userName;
     newMessage.content = body.content;
+    ;
 
     try {
       const message = await this.messageService.create(newMessage);
+      console.log(message);
       return { message };
     } catch (e) {
       throw new HttpException(`Task creation failed. ${e.message}`, HttpStatus.BAD_REQUEST);

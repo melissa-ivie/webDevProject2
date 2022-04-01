@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -9,8 +9,8 @@ export class Message {
   @Column()
   chatroom: string;
 
-  @CreateDateColumn()
-  time: Date;
+  @Column()
+  timeStamp: number;
 
   @Column()
   userName: string;

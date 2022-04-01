@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
-import { User } from './user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { ChatRoom } from './chat_room.entity';
 
 @Entity()
 export class Message {
@@ -7,17 +7,17 @@ export class Message {
   id: number;
 
   @Column()
-  chatroom: string;
+  chatRoomId: number;
 
   @Column()
-  timeStamp: number;
+  userId: number;
+
+  @Column()
+  contents: string;
 
   @Column()
   userName: string;
 
-  @Column()
-  content: string;
-
-  @OneToOne(() => User, (user) => user.email)
-  users: User[];
+  @ManyToOne(() => ChatRoom, (chatRoom) => chatRoom.messages)
+  chatRoom: ChatRoom;
 }

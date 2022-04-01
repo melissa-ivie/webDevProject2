@@ -1,3 +1,4 @@
+
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Message } from 'server/entities/message.entity';
@@ -7,23 +8,18 @@ import { Repository } from 'typeorm';
 export class MessagesService {
   constructor(
     @InjectRepository(Message)
-    private messageRepository: Repository<Message>,
+    private readonly messagesRepository: Repository<Message>,
   ) {}
 
-  findAll(relations: string[] = []) {
-    return this.messageRepository.find({ relations });
+  findAllForRoom(id: number): Promise<Message[]> {
+    return this.messagesRepository.find({
+      where: {
+        chatRoomId: id,
+      },
+    });
   }
 
-  find(seekid: number) {
-    return this.messageRepository.findOne({ id: seekid });
-  }
-
-//   update(newid: number, newstatus:string) {
-//     return this.messageRepository.update({ id: newid }, { status: newstatus }); // tries to update where quantity is 20...
-//     //return this.tasksRepository.update();
-//   }
-
-  create(newTask: Message) {
-    return this.messageRepository.save(newTask);
+  async create(chatRoom: Message): Promise<Message> {
+    return this.messagesRepository.save(chatRoom);
   }
 }

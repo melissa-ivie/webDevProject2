@@ -30,13 +30,6 @@ export class UsersService {
     return this.usersRespository.findOne(id, { relations });
   }
 
-  findEmail(address: string) {
-    return this.usersRespository.findOne(
-      {where: 
-        {email:address}
-      });
-  }
-
   create(user: User) {
     return this.usersRespository.save(user);
   }

@@ -10,7 +10,7 @@ export class Chatroom {
   lat: number;
 
   @Column()
-  long: number;
+  lon: number;
 
   @Column()
   title: string;

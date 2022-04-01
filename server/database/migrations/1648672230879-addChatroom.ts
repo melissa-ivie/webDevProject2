@@ -18,7 +18,7 @@ export class addChatroom1648672230879 implements MigrationInterface {
                 isNullable: true,
               },
               {
-                name: 'long',
+                name: 'lon',
                 type: 'float',
                 isNullable: true,
               },

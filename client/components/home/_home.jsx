@@ -8,37 +8,47 @@ export const Home = () => {
   const api = useContext(ApiContext);
   const navigate = useNavigate();
   var localChats = [];
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
   const [chatrooms, setChatrooms] = useState(true);
   var options = {
-    enableHighAccuracy: false,
+    enableHighAccuracy: true,
     timeout: 10000,
     maximumAge: 0
   };
+
+  useEffect(async () => {
+    setLoading(true);
+    console.log("here");
+    navigator.geolocation.getCurrentPosition(function(position) {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+      if(latitude)
+      setLat(latitude);
+      setLon(longitude);
+    }, console.log, options);
+    console.log("before load");
+    console.log(loading);
+    console.log(lat)
+    console.log(lon)
+    setLoading(false);
+  }, []);
 
   useEffect(async () => {
     const res = await api.get('/chatrooms');
     setChatrooms(res.chatrooms);
   }, []);
 
-  useEffect(async () => {ß
+  useEffect(async () => {
     const res = await api.get('/users/me');
     setUser(res.user);
   }, []);
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-      sessionStorage.setItem("lat", lat);
-      sessionStorage.setItem("long", long);
-      setLoading(false);
-    }, console.log, options);
-  
-
   const goToNewChatPage = () => {
+    sessionStorage.setItem("lat", lat);
+    sessionStorage.setItem("lon", lon);
     navigate('/newChatPage');
   };
 
@@ -47,15 +57,25 @@ export const Home = () => {
     navigate('/chatpage');
   };
 
-  const getChatrooms = (latitude, longitude) => {
+  const getChatrooms = () => {
+    console.log(loading);
+    let latitude = lat;
+    let longitude = lon;
     let chatObj = {};
     for(const chat in chatrooms){
       let currentChat = chatrooms[chat];
       let prID = currentChat.id; 
       let chatLat = currentChat.lat;
-      let chatLong = currentChat.long;
-
-      if((Math.abs(chatLat-latitude) < .001) && (Math.abs(chatLong-longitude) < .001)){
+      let chatLon = currentChat.lon;
+      console.log(currentChat);
+      console.log("passed in");
+      console.log(latitude);
+      console.log(longitude);
+      console.log(sessionStorage.getItem("lat"));
+      console.log("chat");
+      console.log(chatLat);
+      console.log(chatLon);
+      if((Math.abs(chatLat-latitude) < .001) && (Math.abs(chatLon-longitude) < .001)){
         chatObj[prID] = currentChat
       }
     }
@@ -63,29 +83,28 @@ export const Home = () => {
   };
 
   if (loading) {
+    console.log("inside loading loop")
     return <div>Loading...</div>;
-  }
-  
-
-  return (
-    <div className='dashboard'>
-      <div className='page'>
-        <Header text="Chatrooms Dashboard"></Header>
-        <div className='pageBody'>
-        <Button className="add" type="button" onClick={goToNewChatPage}> Add New Chatroom </Button>
-          <h3>All Nearby chats:</h3>
-          <div className='projectList'> {getChatrooms(lat, long)}
-            {localChats.map((pro) => {
-              return <Button type="button" className="project" onClick={p => goToChatPage(p,pro)}>{pro.title}</Button>
-            })}
+  }else{
+    return (
+      <div className='dashboard'>
+        <div className='page'>
+          <Header text="Chatrooms Dashboard"></Header>
+          <div className='pageBody'>
+          <Button className="add" type="button" onClick={goToNewChatPage}> Add New Chatroom </Button>
+            <h3>All Nearby chats:</h3> {getChatrooms()}
+            <div className='projectList'> 
+              {localChats.map((pro) => {
+                return <Button type="button" className="project" onClick={p => goToChatPage(p,pro)}>{pro.title}</Button>
+              })}
+            </div>
           </div>
         </div>
+        <footer>
+          <p>Created by Command Line Crusaders</p>
+          <p>Modern Web Development Spring 2022</p>
+        </footer>
       </div>
-      <footer>
-        <p>Created by Command Line Crusaders</p>
-        <p>Modern Web Development Spring 2022</p>
-      </footer>
-    </div>
-    
-  );
+    );
+  }
 };

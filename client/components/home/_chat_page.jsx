@@ -8,6 +8,7 @@ import { Message } from '../common/message';
 
 export const ChatPage = () => {
   const api = useContext(ApiContext);
+  const navigate = useNavigate();
   var userName = "";
   var chatMessages = [];
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,11 @@ export const ChatPage = () => {
     const res = await api.get('/messages');
     setMessages(res.messages);
   }, []);
+
+  const goToDashboard = () => {
+    sessionStorage.setItem("selectedChat", "None");
+    navigate('/dash');
+  };
 
   //Retrieve all messages for this chat
   const getMessages = () => {
@@ -81,6 +87,7 @@ export const ChatPage = () => {
       <div className='page'>
       <Header text={chatroom}></Header>
       <div className='pageBody'>
+      <Button className="return" type="button" onClick={goToDashboard}> Return To Chat Dashboard </Button>
         {chatMessages.map((mes) => {
               return <div>
                 <Message content={mes.content} name={mes.userName}/>

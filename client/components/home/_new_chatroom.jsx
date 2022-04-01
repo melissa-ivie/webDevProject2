@@ -30,12 +30,8 @@ export const NewChatroom = () => {
         return;
         }
 
-        const lat = parseFloat(sessionStorage.getItem("lat"));
-        const long = parseFloat(sessionStorage.getItem("long"));
-        console.log("newChat lat");
-        console.log(lat);
-        console.log("newChat long");
-        console.log(long);
+        let lat = parseFloat(sessionStorage.getItem("lat"));
+        let lon = parseFloat(sessionStorage.getItem("lon"));
         
         fetch('/chatroom', {
             method: 'POST',
@@ -45,7 +41,7 @@ export const NewChatroom = () => {
             },
             body: JSON.stringify({
                 lat,
-                long,
+                lon,
                 title,
             })
         })

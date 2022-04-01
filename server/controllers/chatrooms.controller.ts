@@ -24,12 +24,12 @@ export class ChatroomsController {
   async create(@Body() body: CreateChatroomDto, @Res({ passthrough: true }) res: Response) {
     const newChatroom = new Chatroom();
     newChatroom.lat = body.lat;
-    newChatroom.long = body.long;
+    newChatroom.lon = body.lon;
     newChatroom.title = body.title;
-    newChatroom.userEmails = body.users;
     
     try {
       const chatRoom = await this.chatService.create(newChatroom);
+      console.log(chatRoom);
       return { chatRoom };
     } catch (e) {
       throw new HttpException(`Chatroom creation failed. ${e.message}`, HttpStatus.BAD_REQUEST);

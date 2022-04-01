@@ -1,7 +1,6 @@
 export class CreateChatroomDto {
     lat:number;
-    long:number;
+    lon:number;
     title: string;
-    users: string[];
   }
   
